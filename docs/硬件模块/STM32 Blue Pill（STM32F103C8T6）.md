@@ -62,3 +62,4 @@ For more insights about the technical specifcations refer to the [official datsh
 # Other
 
 - **Trivia:** This board got its name from a forum post at the STM32duino forums and is a reference to the movie [The Matrix](https://www.imdb.com/title/tt0133093/).
+

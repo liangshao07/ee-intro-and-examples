@@ -1,5 +1,7 @@
 # LED Blinking
 
+[[toc]]
+
 # Arduino API
 
 ## Arduino UNO R3
@@ -200,38 +202,53 @@ def blink():
 blink()
 ```
 
-# Raspberry Pi
+# STM32Cube
 
-![https://gpiozero.readthedocs.io/en/stable/images/ledbb.svg]
+ST-Link 烧录下载设置
 
-Turn an [**`LED`**](https://gpiozero.readthedocs.io/en/stable/api_output.html#gpiozero.LED) on and off repeatedly:
+![image-20241118223443185](../images/image-20241118223443185.png)
 
-```python
-**from** **gpiozero** **import** LED
-**from** **time** **import** sleep
+System Core cliked
 
-red = LED(17)
+![SYS-Debug-Serial Wire](../images/Untitled 1-1940417.png)
 
-**while** **True**:
-    red.on()
-    sleep(1)
-    red.off()
-    sleep(1)
+SYS-Debug-Serial Wire
+
+STM32C8T6 核心板，板灯设置，PC13 GPIO
+
+![PC13-OUTPUT](../images/Untitled 2-1940417.png)
+
+PC13-OUTPUT
+
+生成代码
+
+![Untitled](../images/Untitled 3-1940417.png)
+
+添加闪烁代码
+
+```cpp
+HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, 1);
+HAL_Delay(200);
+HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, 0);
+HAL_Delay(200);
 ```
 
-Alternatively:
+![Untitled](../images/Untitled 4-1940417.png)
 
-```python
-**from** **gpiozero** **import** LED
-**from** **signal** **import** pause
+编译
 
-red = LED(17)
+![Untitled](../images/Untitled 5.png)
 
-red.blink()
+烧录下载设置
 
-pause()
-```
+![Untitled](../images/Untitled 6.png)
 
-**Note**
+![Untitled](../images/Untitled 7.png)
 
-Reaching the end of a Python script will terminate the process and GPIOs may be reset. Keep your script alive with [**`signal.pause()`**](https://docs.python.org/3.9/library/signal.html#signal.pause). See [How do I keep my script running?](https://gpiozero.readthedocs.io/en/stable/faq.html#keep-your-script-running) for more information.
+![Untitled](../images/Untitled 8.png)
+
+![Untitled](../images/Untitled 9.png)
+
+![Untitled](../images/Untitled 10.png)
+
+![Untitled](../images/0acaf443-1d52-4e13-9646-7c2e00908072.png)
