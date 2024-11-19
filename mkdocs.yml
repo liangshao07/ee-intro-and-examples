@@ -1,6 +1,7 @@
 site_name: EE intro and examples
+site_url: https://ee.liangwatcher.top
 site_author: LiangWatcher
-site_description: "这是一个专注于技术知识分享的文档网站"
+site_description: "这是一个分享电子技术知识和学习经验的文档网站"
 repo_name: ee-intro-and-examples
 repo_name: https://github.com/liangshao07/ee-intro-and-examples
 copyright: Copyright &copy; 2024-present <a href="https://github.com/liangshao07" target="_blank" rel="noopener noreferrer">LiangWatcher</a>
@@ -8,6 +9,7 @@ copyright: Copyright &copy; 2024-present <a href="https://github.com/liangshao07
 theme:
   name: material
   language: zh
+  favicon: pic/favicon.ico
   include_search_page: false
   search_index_only: true
  
@@ -63,6 +65,12 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/liangshao07/ee-intro-and-examples
+  analytics:
+    provider: google
+    property: G-
+
+extra_css:
+  - stylesheets/custom.css
 
 extra_javascript:
   - javascripts/mathjax.js
@@ -87,6 +95,7 @@ nav:
       - "Bambu 3D 打印机": "工具/Bambu 3D 打印机.md"
       - "实物图": "工具/实物图.md"
       - "嘉立创 EDA": "工具/嘉立创 EDA.md"
+      - "Arduino IDE": "工具/Arduino IDE.md"
       - "App Inventor": "工具/App Inventor.md"
       - "Bambu Studio": "工具/Bambu Studio.md"
       - "Shapr3D": "工具/Shapr3D.md"
@@ -96,14 +105,19 @@ nav:
       - "ESP-IDF API": "软件模块/ESP-IDF API.md"
       - "STM32Cube API": "软件模块/STM32Cube API.md"
       - "MicroPython API": "软件模块/MicroPython API.md"
-      - "GPIOzero API": "软件模块/GPIOzero API.md"
-      - "RPiGPIO API": "软件模块/RPiGPIO API.md"
+      - "LVGL-library": "软件模块/LVGL-library.md"
+      - "Servo-library-Arduino": "软件模块/Servo-library-Arduino.md"
   - 硬件模块:
       - "Arduino UNO R3": "硬件模块/Arduino UNO R3.md"
       - "STM32 Blue Pill（STM32F103C8T6）": "硬件模块/STM32 Blue Pill（STM32F103C8T6）.md"
       - "ESP32-DevKitC": "硬件模块/ESP32-DevKitC.md"
       - "ESP-12E NodeMCU": "硬件模块/ESP-12E NodeMCU.md"
       - "ESP32-CAM": "硬件模块/ESP32-CAM.md"
+      - "Raspberry Pi": "硬件模块/Raspberry Pi.md"
+  - 理论:
+      - "PID": "理论/PID.md"
+      - "LQR": "理论/LQR.md"
+      - "FOC": "理论/FOC.md"
   - "examples":
       - "点亮 LED": "examples/LED Blinking.md"
   - 项目最后: "项目最后.md"

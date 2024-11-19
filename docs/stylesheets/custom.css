@@ -1,0 +1,93 @@
+:root {
+  --side-bar-bg-color: var(--base2);
+  --text-color: #44425e;
+  --bg-color: #fafaff;
+  --green: #00b253;
+  --orange: #f49b00;
+  --red: #ff3399;
+  --yellow: #FFAA00;
+  --magenta: #CC66FF;
+  --violet: #6c71c4;
+  --blue: #01a9e1;
+  --cyan: #00CED1;
+  --base2: #f5f5ff;
+  --base1: #93a1a1;
+  --base3: #f2f2f7;
+  --bblue: rgba(1, 169, 224, 0.08);
+  --bgreen: rgba(0, 179, 83, 0.08);
+  --bred: rgba(255, 51, 153, 0.03);
+  --base02: #3d3d56;
+  --base03: #2c2c3e;
+  --item-hover-bg-color: var(--base2);
+  --window-border: 1px solid #93a1a1;
+  --active-file-bg-color: var(--red);
+  --active-file-text-color: var(--bg-color);
+  --item-hover-text-color: #93a1a1;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--red) !important;
+  font-weight: bold !important;
+}
+
+blockquote {
+  border-left: 0px !important;
+  background-color: var(--base3);
+  border-radius: 5px;
+  padding: 16px;
+  color: var(--base02)
+}
+
+h4,
+h5,
+h6 {
+  /* display:  none; */
+  color: var(--red) !important;
+  /* font-size: 1rem; */
+}
+
+h4+blockquote {
+  background-color: var(--bred);
+  color: var(--red) !important;
+  padding-left: 50px !important;
+  border-radius: 5px !important;
+}
+
+/* h4+blockquote::before {
+  content: url('sneh/info-red.png');
+  position: relative;
+  left: -30px;
+  top: 30px;
+} */
+
+h5+blockquote {
+  background-color: var(--bgreen);
+  color: var(--green) !important;
+  padding-left: 50px !important;
+  border-radius: 5px !important;
+}
+
+/* h5+blockquote::before {
+  content: url('sneh/idea-green.png');
+  position: absolute;
+  left: 630px;
+} */
+
+h6+blockquote {
+  background-color: var(--bblue);
+  color: var(--blue) !important;
+  padding-left: 50px !important;
+  border-radius: 5px !important;
+}
+
+/* h6+blockquote::before {
+  content: url('sneh/bookmark-blue.png');
+  position: absolute;
+  left: 630px;
+} */
+
+blockquote blockquote {
+  padding-right: 0;
+}
