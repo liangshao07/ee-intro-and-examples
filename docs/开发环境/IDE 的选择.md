@@ -2,13 +2,13 @@
 
 - Arduino IDE
 
-    - Arduino、ESP32、STM32 等
+    - Arduino、ESP32、STM32 等，基本主流开发板都支持
 
 - Thonny
 
-    - Raspberry Pi 系统里编写，VNC 连接编写
+    - Raspberry Pi 系统自带的 IDE，可在树莓派系统里编写，VNC 连接编写
 
-    - ESP32
+    - ESP32 MicroPython 框架支持极好
 
 - VS code：中大型项目，免费，已经足够智能强大
 

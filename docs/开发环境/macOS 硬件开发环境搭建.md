@@ -2,17 +2,19 @@
 
 > 软件开发环境见：
 
-- Arduino IDE
-    - Arduino
-    - ESP32
-    - STM32
-- STM32CubeIDE
-- VSC（VS code）
-    - PlatformIO
-    - ESP-IDF
-    - Remote - SSH
-- Clion
-- Thonny
+###### 目录
+
+> - Arduino IDE
+>     - Arduino
+>     - ESP32
+>     - STM32
+> - STM32CubeIDE
+> - VSC（VS code）
+>     - PlatformIO
+>     - ESP-IDF
+>     - Remote - SSH
+> - Clion
+> - Thonny
 
 # Arduino IDE
 

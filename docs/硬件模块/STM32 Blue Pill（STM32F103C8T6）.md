@@ -1,10 +1,12 @@
 # STM32 Blue Pill（STM32F103C8T6）
 
-For more insights about the technical specifcations refer to the [official datsheet](https://www.st.com/resource/en/datasheet/stm32f103c8.pdf) and [reference manual](https://www.st.com/content/ccc/resource/technical/document/reference_manual/59/b9/ba/7f/11/af/43/d5/CD00171190.pdf/files/CD00171190.pdf/jcr:content/translations/en.CD00171190.pdf) by STMicroelectronics.
+##### 相关
 
-- https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html#USB-connector
-- [Schematic](https://stm32-base.org/assets/pdf/boards/original-schematic-STM32F103C8T6-Blue_Pill.pdf)
-- [3D printable mount](https://www.thingiverse.com/thing:4061855)
+> For more insights about the technical specifcations refer to the [official datsheet](https://www.st.com/resource/en/datasheet/stm32f103c8.pdf) and [reference manual](https://www.st.com/content/ccc/resource/technical/document/reference_manual/59/b9/ba/7f/11/af/43/d5/CD00171190.pdf/files/CD00171190.pdf/jcr:content/translations/en.CD00171190.pdf) by STMicroelectronics.
+>
+> - https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html#USB-connector
+> - [Schematic](https://stm32-base.org/assets/pdf/boards/original-schematic-STM32F103C8T6-Blue_Pill.pdf)
+> - [3D printable mount](https://www.thingiverse.com/thing:4061855)
 
 ![STM32 Blue Pill-1](../images/STM32 Blue Pill-1.png)
 
