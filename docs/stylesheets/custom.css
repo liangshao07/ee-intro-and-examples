@@ -34,7 +34,8 @@ h3 {
 
 blockquote {
   border-left: 0px !important;
-  background-color: var(--base3);
+  /* background-color: var(--base3); */
+  background-color: var(--bred);
   border-radius: 5px;
   padding: 16px;
   color: var(--base02)
