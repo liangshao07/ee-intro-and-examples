@@ -115,6 +115,7 @@ nav:
       - "ESP32-CAM": "硬件模块/ESP32-CAM.md"
       - "Raspberry Pi": "硬件模块/Raspberry Pi.md"
   - 理论:
+      - "概念扫盲": "理论/概念扫盲.md"
       - "PID": "理论/PID.md"
       - "LQR": "理论/LQR.md"
       - "FOC": "理论/FOC.md"
