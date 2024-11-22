@@ -1,6 +1,6 @@
 #macOS 硬件开发环境搭建
 
-> 软件开发环境见：
+> 软件开发环境见：https://www.liangwatcher.top/article/mac-dev
 
 ###### 目录
 

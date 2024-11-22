@@ -1,6 +1,7 @@
 site_name: EE intro and examples
+site_url: https://ee.liangwatcher.top/
 site_author: LiangWatcher
-site_description: "这是一个分享电子技术知识和学习经验的文档网站"
+site_description: "电子技术知识和学习经验的分享网站"
 repo_name: ee-intro-and-examples
 repo_name: https://github.com/liangshao07/ee-intro-and-examples
 copyright: Copyright &copy; 2024-present <a href="https://github.com/liangshao07" target="_blank" rel="noopener noreferrer">LiangWatcher</a>

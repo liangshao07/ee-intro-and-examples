@@ -6,11 +6,11 @@
 >     - 核心模组没换，都是 ESP-WROOM-32，故而无论 v 几版本文档可看，只是开发板引脚不同
 > - Arduino 框架版本文档：https://docs.geeksman.com/esp32/Arduino/01.esp32-arduino-intro.html
 
-v1-30pin
+##vv1-30pin
 
 ![ESP32-DevKitC](../images/ESP32-DevKitC.webp)
 
-v4-38pin
+## v4-38pin
 
 ![img](../images/esp32_devkitC_v4_pinlayout.png)
 

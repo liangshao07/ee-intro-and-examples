@@ -1,0 +1,33 @@
+# 忽略构建目录
+site/
+
+# 忽略Python虚拟环境目录（如果有）
+venv/
+
+# 忽略特定的临时文件或编辑器备份文件
+*.swp
+*.swo
+*.bak
+
+# 忽略本地配置文件（如果有）
+mkdocs_local.yml
+
+# 忽略缓存文件和目录
+__pycache__/
+.cache/
+
+# 如果使用了Jupyter Notebook生成文档，忽略相关的临时文件
+.ipynb_checkpoints/
+
+# 忽略安装包目录（如果有）
+dist/
+build/
+*.egg-info/
+
+# 忽略LaTeX编译产生的临时文件（如果在文档中使用LaTeX且有编译步骤）
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
