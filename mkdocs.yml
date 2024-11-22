@@ -67,7 +67,7 @@ extra:
       link: https://github.com/liangshao07/ee-intro-and-examples
   analytics:
     provider: google
-    property: G-
+    property: G-D2V34CRL34
 
 extra_css:
   - stylesheets/custom.css
@@ -119,7 +119,16 @@ nav:
       - "PID": "理论/PID.md"
       - "LQR": "理论/LQR.md"
       - "FOC": "理论/FOC.md"
-  - "examples":
-      - "点亮 LED": "examples/LED Blinking.md"
+  - "Basic examples":
+      - "点亮 LED": "examples/01-LED Blinking.md"
+      - "按钮控制 LED": "examples/02-Button LED.md"
+      - "呼吸灯": "examples/03-LED Brightness Control(Breathing light).md"
+      - "数模转换": "examples/04-ADC.md"
+      - "RGB-LED": "examples/05-RGB-LED.md"
+      - "串口控制 LED": "examples/06-Serial Control of LED.md"
+      - "7 位数码管": "examples/07-7-Segment Display.md"
+      - "LCD 屏幕": "examples/08-LCD.md"
+      - "OLED 屏幕": "examples/09-OLED.md"
+
   - 项目最后: "项目最后.md"
       
