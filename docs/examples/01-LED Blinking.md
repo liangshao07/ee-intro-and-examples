@@ -14,6 +14,8 @@
 
 ## Arduino UNO R3
 
+[在线仿真](https://www.tinkercad.com/things/aPcPF5JDUOw-led-blinking?sharecode=qxi01Bj7LQ71ykmhJnhSy329A7ZkoUfjXGdz-9Sk2Dw)：https://www.tinkercad.com/things/aPcPF5JDUOw-led-blinking?sharecode=qxi01Bj7LQ71ykmhJnhSy329A7ZkoUfjXGdz-9Sk2Dw
+
 ![Clipboard - 2024-10-08 20.55.59](../images/Clipboard - 2024-10-08 20.55.59.png)
 
 ```arduino
@@ -62,6 +64,10 @@ void loop() {
 ```
 
 ## STM32F103C8T6 Bule Pill
+
+[在线仿真](https://wokwi.com/projects/411342038321058817)：https://wokwi.com/projects/411342038321058817
+
+![Clipboard - 2024-11-22 17.57.16](../images/Clipboard - 2024-11-22 17.57.16.png)
 
 ```arduino
 /*
@@ -158,6 +164,10 @@ void loop() {
 # MicroPython API
 
 ## ESP32-DevKitC
+
+[在线仿真](https://wokwi.com/projects/411787521156042753)：https://wokwi.com/projects/411787521156042753
+
+![Clipboard - 2024-11-22 17.50.22](../images/Clipboard - 2024-11-22 17.50.22.png)
 
 ```python
 """

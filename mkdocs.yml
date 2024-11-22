@@ -83,9 +83,6 @@ nav:
       - "Windows 硬件开发环境搭建": "开发环境/Windows 硬件开发环境搭建.md"
       - "macOS 硬件开发环境搭建": "开发环境/macOS 硬件开发环境搭建.md"
       - "IDE 的选择": "开发环境/IDE 的选择.md"
-      - 驱动: "开发环境/驱动.md"
-      - 烧录: "开发环境/烧录.md"
-      - 调试: "开发环境/调试.md"
   - 工具:
       - 焊接: "工具/焊接.md"
       - 加工: "工具/加工.md"
@@ -129,6 +126,14 @@ nav:
       - "7 位数码管": "examples/07-7-Segment Display.md"
       - "LCD 屏幕": "examples/08-LCD.md"
       - "OLED 屏幕": "examples/09-OLED.md"
+  - "meArm 循序渐进编写代码":
+      - "项目导论": "meArm/项目导论.md"
+      - "控制一个 Servo 到控制四个 Servo": "meArm/控制一个 Servo 到控制四个 Servo.md"
+      - "模块化控制 Servo": "meArm/模块化控制 Servo.md"
+      - "串口命令控制 Servo": "meArm/串口命令控制 Servo.md"
+      - "手柄模式控制": "meArm/手柄模式控制.md"
+      - "蓝牙控制 Servo": "meArm/蓝牙控制.md"
+      - "工程化项目代码": "meArm/工程化项目代码.md"
 
   - 项目最后: "项目最后.md"
       
