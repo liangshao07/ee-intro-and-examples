@@ -127,6 +127,9 @@ nav:
       - "LCD 屏幕": "examples/08-LCD.md"
       - "OLED 屏幕": "examples/09-OLED.md"
       - "舵机": "examples/10-Basic Servo.md"
+      - "直流电机": "examples/11-DC motor.md"
+      - "42 步进电机": "examples/12-42 Stepper motor.md"
+      - "48 步进电机": "examples/13-48 Stepper motor.md"
   - "meArm 循序渐进编写代码":
       - "项目导论": "meArm/项目导论.md"
       - "控制一个 Servo 到控制四个 Servo": "meArm/控制一个 Servo 到控制四个 Servo.md"
