@@ -126,6 +126,7 @@ nav:
       - "7 位数码管": "examples/07-7-Segment Display.md"
       - "LCD 屏幕": "examples/08-LCD.md"
       - "OLED 屏幕": "examples/09-OLED.md"
+      - "舵机": "examples/10-Basic Servo.md"
   - "meArm 循序渐进编写代码":
       - "项目导论": "meArm/项目导论.md"
       - "控制一个 Servo 到控制四个 Servo": "meArm/控制一个 Servo 到控制四个 Servo.md"
