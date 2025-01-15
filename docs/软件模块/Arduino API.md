@@ -8,9 +8,12 @@
 
 ## 优质教程
 
-【【中英字幕】油管大神Arduino基础课程】 https://www.bilibili.com/video/BV1k64y1u75j/?share_source=copy_web&vd_source=0152764925b99fadd2e9e3592e9421a8
+- [**New Arduino Tutorials**](https://www.youtube.com/playlist?list=PLGs0VKk2DiYw-L-RibttcvK-WBZm8WLEP)
+    - 【【中英字幕】油管大神Arduino基础课程】 https://www.bilibili.com/video/BV1k64y1u75j/?share_source=copy_web&vd_source=0152764925b99fadd2e9e3592e9421a8
+    - [**All New Arduino R4 WiFi LESSONS for Absolute Beginners**](https://www.youtube.com/playlist?list=PLGs0VKk2DiYyn0wN335MXpbi3PRJTMmex)
+        - 2023 新开发板录制的教程
 
-【【太极创客】零基础入门学用Arduino 第一部分 合辑】 https://www.bilibili.com/video/BV164411J7GE/?share_source=copy_web&vd_source=0152764925b99fadd2e9e3592e9421a8
+- 【【太极创客】零基础入门学用Arduino 第一部分 合辑】 https://www.bilibili.com/video/BV164411J7GE/?share_source=copy_web&vd_source=0152764925b99fadd2e9e3592e9421a8
 
 # 什么是 Arduino
 
@@ -41,8 +44,6 @@ Arduino 诞生于伊夫雷亚交互设计学院，原本是一种便于快速制
 
 - See [Supported boards](https://github.com/stm32duino/Arduino_Core_STM32/#supported-boards) section of the [Arduino_Core_STM32/README.md](https://github.com/stm32duino/Arduino_Core_STM32/#readme).
 - See [API](https://github.com/stm32duino/Arduino_Core_STM32/wiki/API) references for usage of accessing the hardware with the Arduino API-functions.
-
-
 
 参考：
 

@@ -8,7 +8,7 @@
 >     - ESP32-DevKitC
 > - MicroPython API
 >     - ESP32-DevKitC
-> - STM32Cube（待补充）
+> - STM32Cube
 
 # Arduino API
 
@@ -359,3 +359,40 @@ def main():
 # 调用主函数开始执行
 main()
 ```
+
+# STM32Cube
+
+- 新建工程（参考 LED Blinking）
+- 配置引脚
+
+![image-20241204214437378](../images/image-20241204214437378.png)
+
+- 编写代码
+    - 按下时，切换
+    - 每次按下，切换
+
+
+```cpp
+	  HAL_GPIO_ReadPin(GPIOB,B_KEY_Pin);	// == below
+	  HAL_GPIO_ReadPin(B_KEY_GPIO_Port,B_KEY_Pin);	// Reading GPIO_B 12, HIGH or LOW;
+	  // GPIO_PIN_SET = 1 / GPIO_PIN_RESET = 0
+if(HAL_GPIO_ReadPin(B_KEY_GPIO_Port,B_KEY_Pin) == GPIO_PIN_RESET){
+		  HAL_GPIO_WritePin(C_LED_GPIO_Port, C_LED_Pin, GPIO_PIN_SET);
+	  }
+	  else{
+		  HAL_GPIO_WritePin(C_LED_GPIO_Port, C_LED_Pin, GPIO_PIN_RESET);
+	  }
+```
+
+```cpp
+// Toggles on and off each time the button is pressed
+	  
+	  if(HAL_GPIO_ReadPin(GPIOB, B_KEY_Pin)==GPIO_PIN_RESET){
+		  HAL_Delay(10);	// Keystroke elimination
+		  if (HAL_GPIO_ReadPin(GPIOB, B_KEY_Pin)==GPIO_PIN_RESET){
+			  HAL_GPIO_TogglePin(GPIOC, C_LED_Pin);	// Toggle High-Low Level
+			  while(HAL_GPIO_ReadPin(GPIOB, B_KEY_Pin)==GPIO_PIN_RESET){}	// Keystroke elimination
+		  }
+	  }
+```
+

@@ -1,5 +1,12 @@
 # Arduino UNO R3
 
+#### 前置
+
+> - Arduino API and Arduino IDE 开发
+> - MATLAB Simulink 仿真开发：
+>     - 官方教程：https://www.youtube.com/watch?v=dtWqoQUzPwI
+>     - 其它：https://www.youtube.com/watch?v=bB5-mvA41cI&list=PLnFVwvy9GeM4Z994R8sbDLFE9yj8Ad9KN
+
 ##### 相关
 
 > - 开发板官网：https://docs.arduino.cc/hardware/uno-rev3/#features

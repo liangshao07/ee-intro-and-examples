@@ -1,4 +1,4 @@
-# 48 Stepper motor.md
+# 48 Stepper motor
 
 ###### 目录
 
