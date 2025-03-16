@@ -1,0 +1,3203 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="电子技术知识和学习经验的分享网站">
+      
+      
+        <meta name="author" content="LiangWatcher">
+      
+      
+        <link rel="canonical" href="https://ee.liangwatcher.top/%E7%90%86%E8%AE%BA/FOC/">
+      
+      
+        <link rel="prev" href="../LQR/">
+      
+      
+        <link rel="next" href="../%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">
+      
+      
+      <link rel="icon" href="../../pic/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.8">
+    
+    
+      
+        <title>FOC - EE intro and examples</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto Slab";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-D2V34CRL34"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-D2V34CRL34",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-D2V34CRL34",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="purple" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#foc" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="EE intro and examples" class="md-header__button md-logo" aria-label="EE intro and examples" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EE intro and examples
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              FOC
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="purple" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="purple" data-md-color-accent="deep-purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="EE intro and examples" class="md-nav__button md-logo" aria-label="EE intro and examples" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    EE intro and examples
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    前言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    开发环境
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            开发环境
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/Windows%20%E7%A1%AC%E4%BB%B6%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Windows 硬件开发环境搭建
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/macOS%20%E7%A1%AC%E4%BB%B6%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    macOS 硬件开发环境搭建
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/IDE%20%E7%9A%84%E9%80%89%E6%8B%A9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IDE 的选择
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/%E5%98%89%E7%AB%8B%E5%88%9B%20EDA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    嘉立创 EDA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/Arduino%20IDE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arduino IDE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/%E7%83%A7%E5%BD%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    烧录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/%E8%B0%83%E8%AF%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    调试
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    工具
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            工具
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/%E7%84%8A%E6%8E%A5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    焊接
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/%E5%8A%A0%E5%B7%A5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    加工
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/%E4%B8%87%E7%94%A8%E8%A1%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    万用表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/%E7%A4%BA%E6%B3%A2%E5%99%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    示波器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/%E6%95%B0%E6%8E%A7%E7%94%B5%E6%BA%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数控电源
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/Bambu%203D%20%E6%89%93%E5%8D%B0%E6%9C%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bambu 3D 打印机
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/%E6%94%B6%E7%BA%B3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    收纳
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/%E8%8A%AF%E7%89%87%E6%89%8B%E5%86%8C%E6%9F%A5%E8%AF%A2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    芯片手册查询
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/%E5%AE%9E%E7%89%A9%E5%9B%BE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    实物图、仿真模拟
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/App%20Inventor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    App Inventor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/Bambu%20Studio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bambu Studio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/Cura%20%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cura 使用与基本原理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/Shapr3D/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Shapr3D
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/Fusion%20360/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fusion 360
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/MATLAB/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MATLAB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/Webots/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Webots
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%B7%A5%E5%85%B7/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    常用软件分享
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    软件模块
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            软件模块
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%BD%AF%E4%BB%B6%E6%A8%A1%E5%9D%97/Arduino%20API/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arduino API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%BD%AF%E4%BB%B6%E6%A8%A1%E5%9D%97/ESP-IDF%20API/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ESP-IDF API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%BD%AF%E4%BB%B6%E6%A8%A1%E5%9D%97/STM32Cube%20API/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    STM32Cube API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%BD%AF%E4%BB%B6%E6%A8%A1%E5%9D%97/MicroPython%20API/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MicroPython API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%BD%AF%E4%BB%B6%E6%A8%A1%E5%9D%97/Matlab%20API/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MATLAB API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%BD%AF%E4%BB%B6%E6%A8%A1%E5%9D%97/Raspberry%20Pi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Raspberry Pi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%BD%AF%E4%BB%B6%E6%A8%A1%E5%9D%97/LVGL-library/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LVGL-library
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%BD%AF%E4%BB%B6%E6%A8%A1%E5%9D%97/Servo-library-Arduino/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Servo-library-Arduino
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    硬件模块
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            硬件模块
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    元器件
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            元器件
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%9D%97/%E5%85%83%E5%99%A8%E4%BB%B6/%E7%94%B5%E5%AD%90%E5%99%A8%E4%BB%B6%E5%88%86%E7%B1%BB/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    电子器件分类
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%9D%97/%E5%85%83%E5%99%A8%E4%BB%B6/%E7%94%B5%E9%98%BB/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    电阻
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    模块
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            模块
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%9D%97/%E6%A8%A1%E5%9D%97/%E8%93%9D%E7%89%99%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    电蓝牙模块
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%9D%97/%E6%A8%A1%E5%9D%97/OLED%20%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OLED 模块
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%9D%97/%E6%A8%A1%E5%9D%97/MPU6050%20%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPU6050 模块
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%9D%97/%E6%A8%A1%E5%9D%97/DVR833%20%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DVR833 模块
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%9D%97/%E6%A8%A1%E5%9D%97/TB6612%20%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TB6612 模块
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%9D%97/Arduino%20UNO%20R3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arduino UNO R3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%9D%97/STM32%20Blue%20Pill%EF%BC%88STM32F103C8T6%EF%BC%89/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    STM32 Blue Pill（STM32F103C8T6）
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%9D%97/ESP32-DevKitC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ESP32-DevKitC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%9D%97/WEMOS%20LOLIN32%20Lite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WEMOS LOLIN32 Lite
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%9D%97/ESP-12E%20NodeMCU/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ESP-12E NodeMCU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%9D%97/ESP32-CAM/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ESP32-CAM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%9D%97/Raspberry%20Pi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Raspberry Pi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%9D%97/NanoPi%20Duo2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NanoPi Duo2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    理论
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            理论
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A6%82%E5%BF%B5%E6%89%AB%E7%9B%B2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    概念扫盲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%BB%A4%E6%B3%A2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    滤波
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PID/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PID
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LQR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LQR
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    FOC
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    FOC
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      目录
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    编程基础
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数学基础
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数学建模
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    电路理论
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%94%B5%E6%BA%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    电源
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E8%BF%90%E6%94%BE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    运放
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%8A%A8%E6%80%81%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    动态系统建模
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    机器人学
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%9C%BA%E6%A2%B0%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    机械结构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    论文写作
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%94%B5%E8%B5%9B%E4%B8%93%E9%A2%98/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    电赛专题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Basic examples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Basic examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/01-LED%20Blinking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    点亮 LED
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/02-Button%20LED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    按钮控制 LED
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/03-LED%20Brightness%20Control%28Breathing%20light%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    呼吸灯
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/04-ADC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数模转换
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/05-RGB-LED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RGB-LED
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/06-Serial%20Control%20of%20LED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    串口控制 LED
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/07-7-Segment%20Display/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7 位数码管
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/08-LCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LCD 屏幕
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/09-OLED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OLED 屏幕
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/10-Basic%20Servo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    舵机
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/11-DC%20motor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    直流电机
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/12-42%20Stepper%20motor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    42 步进电机
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/13-48%20Stepper%20motor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    48 步进电机
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    项目
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            项目
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_1" id="__nav_8_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    meArm 循序渐进编写代码
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            meArm 循序渐进编写代码
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/meArm/%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%AE%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    项目导论
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/meArm/%E6%8E%A7%E5%88%B6%E4%B8%80%E4%B8%AA%20Servo%20%E5%88%B0%E6%8E%A7%E5%88%B6%E5%9B%9B%E4%B8%AA%20Servo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    控制一个 Servo 到控制四个 Servo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/meArm/%E6%A8%A1%E5%9D%97%E5%8C%96%E6%8E%A7%E5%88%B6%20Servo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    模块化控制 Servo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/meArm/%E4%B8%B2%E5%8F%A3%E5%91%BD%E4%BB%A4%E6%8E%A7%E5%88%B6%20Servo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    串口命令控制 Servo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/meArm/%E6%89%8B%E6%9F%84%E6%A8%A1%E5%BC%8F%E6%8E%A7%E5%88%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    手柄模式控制
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/meArm/%E8%93%9D%E7%89%99%E6%8E%A7%E5%88%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    蓝牙控制 Servo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/meArm/%E5%B7%A5%E7%A8%8B%E5%8C%96%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    工程化项目代码
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    平衡类
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            平衡类
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/%E5%B9%B3%E8%A1%A1%E7%B1%BB/Arduino%20%E5%B9%B3%E8%A1%A1%E5%B0%8F%E8%BD%A6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arduino 平衡小车
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/%E5%B9%B3%E8%A1%A1%E7%B1%BB/ESP32%20%E5%B9%B3%E8%A1%A1%E5%B0%8F%E8%BD%A6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ESP32 平衡小车
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/%E5%B9%B3%E8%A1%A1%E7%B1%BB/ESP32%20mini%20%E5%B9%B3%E8%A1%A1%E5%B0%8F%E8%BD%A6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ESP32 mini 平衡小车
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/%E5%B9%B3%E8%A1%A1%E7%B1%BB/STM32%20%E5%B9%B3%E8%A1%A1%E5%B0%8F%E8%BD%A6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    STM32 平衡小车
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/%E5%B9%B3%E8%A1%A1%E7%B1%BB/%E6%97%A0%E5%88%B7%E5%B9%B3%E8%A1%A1%E5%B0%8F%E8%BD%A6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    无刷 FOC 平衡小车
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    产品分析
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            产品分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/%E4%BA%A7%E5%93%81%E5%88%86%E6%9E%90/AiNova/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AiNova
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/%E4%BA%A7%E5%93%81%E5%88%86%E6%9E%90/%E9%BA%A6%E8%BD%AE%E8%A7%86%E8%A7%89%E8%BD%A6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    麦轮视觉车
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/%E4%BA%A7%E5%93%81%E5%88%86%E6%9E%90/%E4%B8%89%E8%BD%AE%E8%BD%A6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    三轮车
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/%E4%BA%A7%E5%93%81%E5%88%86%E6%9E%90/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%9C%BA%E6%A2%B0%E8%87%82/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    树莓派机械臂
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE/mini%20%E7%BB%98%E5%9B%BE%E4%BB%AA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mini 绘图仪
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A1%B9%E7%9B%AE%E6%9C%80%E5%90%8E/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    项目最后
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="foc">FOC 算法——无刷电机原理与控制</h1>
+<h6 id="_1">目录</h6>
+<blockquote>
+<ul>
+<li>为什么需要学习理论</li>
+<li>无刷电机</li>
+<li>FOC 算法原理<ul>
+<li>CLARKE 变换</li>
+<li>PARK 变换</li>
+</ul>
+</li>
+<li>开环 FOC</li>
+<li>闭环 FOC</li>
+<li>封装 FOC 库</li>
+</ul>
+</blockquote>
+<h1 id="_2">为什么需要学习理论</h1>
+<p><strong>SimpleFOC</strong> 的很多不足和短板，这些短板主要分为以下几个方面：</p>
+<ul>
+<li><strong>SimpleFOC</strong> 库架构复杂，内存占用大</li>
+<li><strong>SimpleFOC</strong> 库只注重 FOC 功能，没有做很多的软硬件扩展支持，比如Can，双编码器，ROS，无线，OpenMV，Python库，树莓派等，这限制了其在应用领域的进一步发展</li>
+<li><strong>SimpleFOC</strong> 库没有很好的电机快速应用功能，想要在这个库上运行电机，必须经过复杂的调参，所以，我认为引入自动PID调参在我的库里实际上很有必要</li>
+<li><strong>SImpleFOC</strong> 库没有无感电机驱动的相关算法，限制了其在无感工况条件下的应用</li>
+</ul>
+<p>理想中 FOC 库会具有以下优势功能：</p>
+<ul>
+<li><strong>资源占用低</strong>：内存占用比 <em>SimpleFOC</em> 少2/3</li>
+<li><strong>开放度更广</strong>：库把基本的FOC算法接口（如电角度、IαIα 、IβIβ）等以一种及其简单的方式向用户开放，使得用户可以直接接触到 FOC 算法实现的全过程，易于学习和在此基础上更进一步的开发 FOC 算法</li>
+<li><strong>外接能力强</strong>：支持与 <em>OpenMV、树莓派、Python</em> 等多种硬件方案和软件语言直接的对接和互相调用，可以以比 <em>SimpleFOC</em> 更快的方式完成无刷电机应用的开发</li>
+<li><strong>即插即用，无需校准</strong>：先进的参数自识别功能可以使得用户无需配置任何参数，直接插入电机和编码器即可跑FOC</li>
+<li><strong>无线控制支持</strong>：高速 <em>UDP，ESPNow</em> 通讯，无需信号线即可控制电机 脚本支持：库内建强大的脚本语言 <em>Lua</em>，可以在不编译的情况下快速建立FOC应用</li>
+<li><strong>强大的工具链支持</strong>：支持与 <em>Matlab Simulink 、ROS</em>  等系统直接通讯，秒速建立机器人应用</li>
+<li><strong>高精度减速器应用支持</strong>：支持双编码器减速机应用</li>
+</ul>
+<h2 id="foc_1">参考 FOC</h2>
+<p>本 FOC 库将与 <strong>DengFOC</strong> 硬件联合组成一整套完整可用的 FOC 电机驱动方案。资料链接：</p>
+<p>1 <a href="https://shop564514875.taobao.com/">灯哥开源 淘宝店–一站配齐DengFOC板</a> 您的支持就是我们持续做开源内容和课程的动力，项目收益将用于后续开发DengFOC和做课程~</p>
+<p>2 <a href="https://github.com/ToanTech/DengFOC_Lib">DengFOC库 Github</a></p>
+<p>3 <a href="https://github.com/ToanTech/Deng-s-foc-controller">DengFOC硬件 Github</a></p>
+<p>4 <a href="http://dengfoc.com/#/">DengFOC官网</a> 包含课程文字版讲义，DengFOC使用文档，库使用方法等。</p>
+<h1 id="_3">无刷电机</h1>
+<h2 id="_4">无刷电机结构分类</h2>
+<p>首先，在学会怎么控制无刷电机前，我们需要对无刷电机的结构有基本的认识，基本的航模无刷电机结构图如下图所示，分为前盖，中盖，后盖，磁铁，硅钢片，漆包线、轴承和转轴组成。</p>
+<p><img alt="无刷电机的组成" src="../../images/1-1.png" /></p>
+<p>更加宏观上分，我们也可以直接把电机分为定子部分和转子部分。</p>
+<ul>
+<li><strong>定子</strong>就是有线圈绕组，固定不动的部分；</li>
+<li><strong>转子</strong>就是电机旋转的部分，用于输出电机的转动和扭矩。</li>
+</ul>
+<p>而进一步的，无刷电机可以分为内转子和外转子两种。</p>
+<ul>
+<li><strong>内转子无刷电机</strong>就是转子在内部；</li>
+<li><strong>外转子无刷电机</strong>就是转子在外面，我们常见的无刷电机。比如航模无刷电机，就是外转子无刷电机。</li>
+</ul>
+<h2 id="_5">直流无刷电机驱动原理</h2>
+<p>直流无刷电机依靠改变电机定子线圈的电流交变频率和波形，在定子周围形成磁场，驱动转子永磁体转动，从而带动电机旋转。所以，研究改变定子线圈电流交变频率和波形是驱动电机的关键。</p>
+<h2 id="_6">硬件控制原理</h2>
+<p>无刷电机与有刷电机的区别在于无刷电机没有电刷，不能像有刷电机那样通过机械结构进行电流换向，而是要通过 MOS 等器件实现电子换向。MOS 可看作是控制电流通断的开关，类似水龙头控制水流。</p>
+<p>通过控制不同 MOS 管的通断组合，可改变电机线圈电流大小和方向。</p>
+<p>例如，打开 Q1 管和 Q2 管，电流从 A 相流到 B 相再到负极，根据右手螺旋定则产生磁场，定子线圈吸引转子磁铁转动，但转子旋转一定角度后会停止。此时打开 Q1 管和 Q4 管，磁场方向改变，转子磁极进一步旋转。交替开关不同 MOS 管，可实现电机磁极交替运动，这就是无刷电机旋转运动原理。因此，电机控制实际上是对 MOS 管开关规律的控制，而这需要单片机程序控制，由此引出 FOC 控制算法，它是对电机运动模型抽象简化，进而有规律控制 MOS 管开关通断的过程。</p>
+<p><img alt="2-2" src="../../images/2-2.png" /></p>
+<p>因此，我们就可以总结出一条规律：<strong>对电机的控制实际上就是对MOS管开关规律的控制</strong>。而MOS管的开关规律是需要用到单片机程序进行控制的，因此这就引出了我们的 <strong>FOC</strong> 控制算法，<strong>FOC</strong> 控制就是一种对电机运动模型进行抽象化和简化，进而有规律控制各个MOS管开关和通断的过程。</p>
+<h1 id="foc_2">FOC 算法原理、数学模型</h1>
+<p>根据期望的电机运行情况，通过一个电机运行模型，实现交替开关各个 MOS 管的算法，这就是 <strong>FOC 算法</strong>，它的另一个名称就是<strong>磁场定向控制算法</strong>，而 <strong>CLARKE 变换</strong>和 <strong>PARK 变换</strong>，就是磁场定向控制算法的<strong>两个核心</strong>。</p>
+<h2 id="clarke">CLARKE 变换</h2>
+<p>交替开关 MOS 管使电机转动，这些 MOS 管快速周期性开关，观察各相可得到 A、B、C 三相电流随时间变化的曲线，它们相位差为 120°。从另一个角度看，控制这个相位差为 120° 的正弦状波形就能实现电机控制。</p>
+<p><img alt="3.1-1" src="../../images/3.1-1.png" /></p>
+<p>CLARKE 变换里的克拉克是一个真实存在的人 ，她的全名叫：<strong>伊迪丝·克拉克（Edith Clarke，1883 年 2 月 10 日 - 1959 年 10 月 29 日）</strong>。她是美国第一位专业从事电气工程师工作的女性， 也是美国第一位电气工程女教授。 她是第一位在美国电气工程师学会发表论文的女性，第一位专业地位得到 Tau Beta Pi 认可的女性工程师，也是第一位被任命为美国电气工程师学会院士的女性。 她专门从事电力系统分析，并撰写了交流电力系统的电路分析。</p>
+<p>所谓<strong>CLARKE 变换，实际上就是降维解耦的过程，把难以辨明和控制的三相相位差120°电机波形降维为两维矢量</strong>。</p>
+<p>控制 120° 的正弦状波形实现电机控制有难度，因为相之间相互耦合，改变一相无法实现控制，必须三相同时改变，问题复杂。CLARKE 变换就是降维解耦过程，把三相相位差 120° 的电机波形降维为两维矢量。其思路是先将三相电流波形抽象化为三个间隔 120° 的矢量，再利用三角函数将矢量降维到两个坐标轴，将复杂三相问题转化为 <span class="arithmatex">\(α - β\)</span> 坐标轴上的数值变化问题。</p>
+<p><img alt="3.1-3" src="../../images/3.1-3.png" /></p>
+<h3 id="clarke_1">CLARKE 变换推导</h3>
+<h4 id="_7">投影</h4>
+<p>显然，针对 <span class="arithmatex">\(α-β\)</span> 坐标系中 <span class="arithmatex">\(α\)</span> 轴，有：</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(\begin{aligned}&amp;\mathrm{I_\alpha=i_a-sin30^\circ i_b-cos60^\circ i_c}\\&amp;\mathrm{I_\alpha=i_a-\frac{1}{2}i_b-\frac{1}{2}i_c}\end{aligned}\)</span>\)</span>​</p>
+<p>针对 <span class="arithmatex">\(α-β\)</span> 坐标系中 <span class="arithmatex">\(β\)</span> 轴，有</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(\begin{aligned}&amp;\mathrm{I_{\beta}}=\cos30^{\circ}\mathrm{i_{b}}-\cos30^{\circ}\mathrm{i_{c}}\\&amp;\mathrm{I_{\beta}}=\frac{\sqrt{3}}{2}\mathrm{i_{b}}-\frac{\sqrt{3}}{2}\mathrm{i_{c}}\end{aligned}\)</span>\)</span>​</p>
+<p>把上面的投影结果列成矩阵形式，有：</p>
+<div class="arithmatex">\[\begin{bmatrix}\mathrm{I}_\alpha\\\mathrm{I}_\beta\end{bmatrix}=\begin{bmatrix}1&amp;&amp;-\frac{1}{2}&amp;&amp;-\frac{1}{2}\\0&amp;&amp;\frac{\sqrt{3}}{2}&amp;&amp;-\frac{\sqrt{3}}{2}\end{bmatrix}\begin{bmatrix}\mathrm{i}_a\\\mathrm{i}_b\\\mathrm{i}_c\end{bmatrix}\]</div>
+<p><img alt="3.1-4" src="../../images/3.1-4.png" /></p>
+<h4 id="_8">等幅值</h4>
+<p>由于 <span class="arithmatex">\(b,c\)</span> 相电流投影的存在，导致在 <span class="arithmatex">\(a\)</span> 相输入 1A 电流，反应在 <span class="arithmatex">\(α\)</span> 轴上的电流并不是等赋值的 1A。</p>
+<p>为使得，重合的矢量 <span class="arithmatex">\(a\)</span> 与 <span class="arithmatex">\(α\)</span> 电流相等，让式子等辐值，乘以 <span class="arithmatex">\(\cfrac 2 3\)</span>:</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\([\begin{array}{l}\mathrm{I}_\alpha\\\mathrm{I}_\beta\end{array}]=\frac{2}{3}[\begin{array}{lllll}1&amp;&amp;-\frac{1}{2}&amp;&amp;-\frac{1}{2}\\0&amp;&amp;\frac{\sqrt{3}}{2}&amp;&amp;-\frac{\sqrt{3}}{2}\end{array}]\begin{bmatrix}\mathrm{i}_\mathrm{a}\\\mathrm{i}_\mathrm{b}\\\mathrm{i}_\mathrm{c}\end{bmatrix}\)</span>\)</span>​</p>
+<p>移项：</p>
+<div class="arithmatex">\[\mathrm{I_{\alpha}}=\frac{2}{3}[\mathrm{i_{a}}-\frac{1}{2}(\mathrm{i_{b}}+\mathrm{i_{c}})]\]</div>
+<p>根据基尔霍夫电流定律：</p>
+<div class="arithmatex">\[\begin{aligned}&amp;\mathrm{i}\mathrm{a}+\mathrm{i}_{\mathrm{b}}+\mathrm{i}_{\mathrm{c}}=0\\\frac{1}{2}\mathrm{i_{a}}&amp;=-\frac{1}{2}(\mathrm{i_b}+\mathrm{i_c})\\&amp;\mathrm{I}_{\alpha}=\frac{2}{3}[\mathrm{i_{a}}+\frac{1}{2}\mathrm{i_{a}}]\\&amp;\mathrm{I_{\alpha}}=\frac{2}{3}\times\frac{3}{2}\mathrm{i}_{\mathrm{a}}\\&amp;\mathrm{I}_{\alpha}=\mathrm{i_a}\end{aligned}\]</div>
+<p>接下来求 <span class="arithmatex">\(<span class="arithmatex">\(\mathrm{I}_{\beta}\)</span>\)</span>​：</p>
+<div class="arithmatex">\[\begin{aligned}\mathrm{Ip}&amp;=\frac{2}{3}\times(\frac{\sqrt{3}}{2}\mathrm{i_{b}}-\frac{\sqrt{3}}{2}\mathrm{i_{c}})\\&amp;=\frac{\sqrt{3}}{3}\times(\mathrm{i_b-i_c})\\&amp;=\frac{1}{\sqrt{3}}\times(\mathrm{i_b-i_c})\end{aligned}\]</div>
+<p>根据基尔霍夫电流定律：</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(\begin{aligned}&amp;\mathrm{i_{a}+i_{b}+i_{c}=0}\\&amp;\mathrm{-}\mathrm{i_{c}=-(i_{a}+i_{b})}\\&amp;\mathrm{Ip}=\frac{1}{\sqrt{3}}\times(\mathrm{i_b-i_c})\\&amp;=\frac{1}{\sqrt{3}}\times(\mathrm{i_b+i_a+i_c})\\&amp;=\frac{1}{\sqrt{3}}\times(2\mathrm{i_b+i_a})\end{aligned}\)</span>\)</span>​</p>
+<p>So,</p>
+<div class="arithmatex">\[\{\begin{array}{c}\mathrm{I_\alpha=i_a}\\\mathrm{I_\beta=\frac{1}{\sqrt{3}}\times(2i_b+i_a)}\end{array}\]</div>
+<p>可以看出，在式子中，我们消去了变量 <span class="arithmatex">\(i_c\)</span>，这是因为由于基尔霍夫电流定律的存在，我们并不需要知道所有三相电流，我们只需要知道两相电流就能够求解得到另外一相的电流，反映在硬件上，<strong>我们就可以省去一路的电流传感器！节省了成本！</strong></p>
+<h3 id="clarke_2">CLARKE 逆变换推导</h3>
+<p>那么，有没有什么办法能够反过来把降维后的形式重新升维变回原来的 <span class="arithmatex">\(i_a,i_b,i_c\)</span>​​ 三相电流波形呢？有，这就被称为<strong>克拉克逆变换</strong>。这个在后续的 FOC 算法中也会很常用到。</p>
+<p>已知：</p>
+<div class="arithmatex">\[\{\begin{array}{c}\mathrm{I_\alpha=i_a}\\\mathrm{I_\beta=\frac{1}{\sqrt{3}}\times(2i_b+i_a)}\end{array}\]</div>
+<p>研究逆变换 <span class="arithmatex">\(i_b\)</span>：</p>
+<div class="arithmatex">\[\begin{aligned}\mathrm{Ip}&amp;=\frac{1}{\sqrt{3}}\times(2\mathrm{i_{b}+ia})\\\mathrm{Ip}&amp;=\frac{1}{\sqrt{3}}\times(2\mathrm{i_{b}}+\mathrm{I_{\alpha}})\\\sqrt{3}\mathrm{I}_{\beta}&amp;=2\mathrm{i}_{\mathrm{b}}+\mathrm{I}_{\alpha}\\2i_{\mathrm{b}}&amp;=\sqrt{3}\mathrm{I}_{\beta}-\mathrm{I}_{\alpha}\\\mathrm{ib}&amp;=\frac{\sqrt{3}\mathrm{I}_{\beta}-\mathrm{I}_{\alpha}}{2}\end{aligned}\]</div>
+<p>根据<strong>基尔霍夫电流定律</strong>，<span class="arithmatex">\(i_a+i_b+i_c=0\)</span>，我们得到逆变换 <span class="arithmatex">\(i_c\)</span>：</p>
+<div class="arithmatex">\[\begin{aligned}\mathrm{i}_{\mathrm{c}}&amp;=-(\mathrm{i_a+i_b})\\&amp;=-\mathrm{I}_{\alpha}-\mathrm{i}_{\mathrm{b}}\\&amp;=-\mathrm{I}_\alpha-\frac{\sqrt{3}\mathrm{I}_\beta-\mathrm{I}_\alpha}{2}\\&amp;=\frac{-2\mathrm{I}_\alpha-\sqrt{3}\mathrm{I}_\beta+\mathrm{I}_\alpha}{2}\\&amp;=\frac{-\mathrm{I}_\alpha-\sqrt{3}\mathrm{I}_\beta}{2}\end{aligned}\]</div>
+<p>So,</p>
+<div class="arithmatex">\[\begin{array}{l}\mathrm{i_a}=\mathrm{I}_\alpha\\\mathrm{i_b}=\frac{\sqrt{3}\mathrm{I_\beta}-\mathrm{I_\alpha}}{2}\\\mathrm{i_c}=\frac{-\mathrm{I_\alpha}-\sqrt{3}\mathrm{I_\beta}}{2}\end{array}\]</div>
+<h2 id="park">PARK 变换</h2>
+<p><strong>PARK 变换</strong> 就是能够帮助我们求得各种旋转情况下的 <span class="arithmatex">\(I_α\)</span> 和 <span class="arithmatex">\(I_β\)</span>​。</p>
+<p>我们发现降维后尽管少了一个变量，但是只要电机转动，<span class="arithmatex">\(I_α\)</span> 和 <span class="arithmatex">\(I_β\)</span> 就依然在一直变化，能不能对这个电机系统进行进一步的降维，使得我们甚至不用考虑变化的 <span class="arithmatex">\(I_α,I_β\)</span>，只需要有一个定值就能够描述整个电机系统的转动状态？</p>
+<p>帕克在我们刚刚固定在电机定子上的 <span class="arithmatex">\(I_α−I_β\)</span> 坐标系上，另外新建了一个坐标系，我们称之为 <span class="arithmatex">\(I_q−I_d\)</span> 坐标系，这个坐标系是可以随电机转子转动的！它与电机转子固联！</p>
+<p><img alt="3.3-2" src="../../images/3.3-2.png" /></p>
+<p>那么我们就有了两个坐标系了，一个是固定在定子上的坐标系 <span class="arithmatex">\(I_α−I_β\)</span>，一个是固定在转子上的坐标系 <span class="arithmatex">\(I_q−I_d\)</span>。进一步的，我们把两个坐标系画在一起，我们就有如下图所示的坐标：</p>
+<p><img alt="3.3-3" src="../../images/3.3-3.png" /></p>
+<p>其中，<span class="arithmatex">\(I_q−I_d\)</span> 坐标系随转子转动，D 轴在此处设定为指向电机的 N 级，<span class="arithmatex">\(I_q−I_d\)</span> 坐标系因转动而造成的与 <span class="arithmatex">\(I_α−I_β\)</span>  坐标系的差角 <span class="arithmatex">\(θ\)</span>，就被称为电角度！</p>
+<p>那么，很轻松的，还是利用简单的三角函数构建的旋转矩阵，在知道电角度的前提下，我们很容易就能够把 <span class="arithmatex">\(i_q−i_d\)</span> 坐标系上的值映射（旋转）到 <span class="arithmatex">\(i_α−i_β\)</span> 坐标系上！式子如下：</p>
+<div class="arithmatex">\[[\begin{array}{c}\mathrm{i_d}\\\mathrm{i_q}\end{array}]=[\begin{array}{ccc}\cos\theta&amp;&amp;\sin\theta\\-\sin\theta&amp;&amp;\cos\theta\end{array}][\begin{array}{c}\mathrm{i_\alpha}\\\mathrm{i_\beta}\end{array}]\]</div>
+<p>因此，在知道电角度的前提下，我们就可以用 <span class="arithmatex">\(i_q,i_d\)</span>​  坐标系上的定值来描述电机的旋转！<strong>这正是我们一直渴望的电机旋转数学模型！</strong></p>
+<h3 id="park_1">PARK 逆变换</h3>
+<p>根据矩阵乘法，取逆，我们可进行帕克逆变换，也就是知道 <span class="arithmatex">\(i_q,i_d\)</span> 值和电角度的前提下，反求 <span class="arithmatex">\(i_α,i_β\)</span> ，式子如下：</p>
+<div class="arithmatex">\[\begin{bmatrix}\mathrm{i}_\alpha\\\mathrm{i}_\beta\end{bmatrix}=\begin{bmatrix}\cos\theta&amp;\sin\theta\\-\sin\theta&amp;\cos\theta\end{bmatrix}^{-1}\begin{bmatrix}\mathrm{i}_\mathrm{d}\\\mathrm{i}_\mathrm{q}\end{bmatrix}\]</div>
+<p>写成等式结果：</p>
+<div class="arithmatex">\[\mathrm{i_{\alpha}=i_d\cos\theta-i_q\sin\theta}\\\mathrm{i_{\beta}=i_q\cos\theta+i_d\sin\theta}\]</div>
+<p>在实际的 FOC 应用中，电角度是实时有编码器求出的，因此是已知的。<span class="arithmatex">\(I_q\)</span> 和 <span class="arithmatex">\(I_d\)</span> 可以合成一个矢量，加上电角度（旋转）的存在，因此可以看成一个旋转的矢量。在通过 <span class="arithmatex">\(I_q,I_d\)</span> 和电角度求得 <span class="arithmatex">\(I_α\)</span> 和 <span class="arithmatex">\(I_β\)</span> 后，我们就可以通过前面提到的克拉克逆变换求得 <span class="arithmatex">\(i_a,i_b,i_c\)</span> 的波形，这正是 FOC 的基本过程！</p>
+<p>通常在简单的 FOC 应用中，我们只需要控制 <span class="arithmatex">\(I_q\)</span> 的电流大小，而把 <span class="arithmatex">\(I_d\)</span> 设置为 0。此时，<span class="arithmatex">\(I_q\)</span> 的大小间接就决定了定子三相电流的大小，进而决定了定子产生磁场的强度。进一步我们可以说，它决定了电机产生的力矩大小！</p>
+<p>而 <span class="arithmatex">\(I_q\)</span> 是旋转的矢量；在前面说了，同时 <span class="arithmatex">\(I_q\)</span> 又会间接影响磁场的强度，这正是 FOC 的名称<strong>磁场定向控制</strong>的由来。</p>
+<h2 id="foc_3">FOC 算法</h2>
+<p>所谓 FOC 的过程，其实就是输入需求的电机力矩，最后得到对应的真实世界电机输出力矩的过程，如上图所示。而其中最核心的数学过程，就是帕克逆变换和克拉克逆变换，而这两个变换的数学公式上图中框图上面的公式所示，其中 PARK 变换可以对用户输入的 <span class="arithmatex">\(I_q\)</span> 进行变换，根据电角度算出 <span class="arithmatex">\(I_α\)</span> 和 <span class="arithmatex">\(I_β\)</span>，接着，通过克拉克逆变换，三相电流 <span class="arithmatex">\(i_a,i_b,i_c\)</span> 能够被求出，最后这三个 <span class="arithmatex">\(i_a,i_b,i_c\)</span> 能够用作控制指令输入到电机控制器硬件中进行电机的控制。</p>
+<p><img alt="3.4-1" src="../../images/3.4-1.png" /></p>
+<h1 id="foc_4">FOC 代码实现</h1>
+<p>包括 FOC 开环速度、FOC 闭环位置、FOC 闭环速度和 FOC 电流闭环等方面，但文中未详细展开介绍这些内容的实现细节。</p>
+<p><a href="https://dengfoc.com/#/dengfoc/灯哥手把手教你写FOC算法/4序FOC开环速度代码的撰写?id=_4-foc-开环速度代码撰写">4 FOC 开环速度代码撰写</a></p>
+<p><a href="https://docs.geeksman.com/esp32/">ESP32 单片机</a></p>
+<h2 id="_9">开环速度</h2>
+<h2 id="_10">闭环位置</h2>
+<h2 id="_11">闭环速度</h2>
+<h2 id="_12">闭环电流</h2>
+<h2 id="_13">闭环电流，改进闭环位置、速度</h2>
+<h2 id="foc-foc">单路 FOC，改进双路 FOC</h2>
+<h2 id="svpwm">SVPWM</h2>
+<h2 id="foc_5">无感 FOC</h2>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<!-- Insert generated snippet here -->
+<script src="https://giscus.app/client.js"
+        data-repo="liangshao07/ee-notes-and-examples"
+        data-repo-id="R_kgDONPIYAg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDONPIYAs4CkQe8"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<!-- Synchronize Giscus theme with palette -->
+<script>
+var giscus = document.querySelector("script[src*=giscus]")
+
+// Set palette on initial load
+var palette = __md_get("__palette")
+if (palette && typeof palette.color === "object") {
+    var theme = palette.color.scheme === "slate"
+    ? "dark_protanopia"
+    : "light_protanopia"
+
+    // Instruct Giscus to set theme
+    giscus.setAttribute("data-theme", theme) 
+}
+
+// Register event handlers after documented loaded
+document.addEventListener("DOMContentLoaded", function() {
+    var ref = document.querySelector("[data-md-component=palette]")
+    ref.addEventListener("change", function() {
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+        var theme = palette.color.scheme === "slate"
+        ? "dark_protanopia"
+        : "light_protanopia"
+
+        // Instruct Giscus to change theme
+        var frame = document.querySelector(".giscus-frame")
+        frame.contentWindow.postMessage(
+        { giscus: { setConfig: { theme } } },
+        "https://giscus.app"
+        )
+    }
+    })
+})
+</script>
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024-present <a href="https://github.com/liangshao07" target="_blank" rel="noopener noreferrer">LiangWatcher</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/liangshao07/ee-intro-and-examples" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["toc.integrate", "highlightjs", "header.autohide", "navigation.tracking", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
