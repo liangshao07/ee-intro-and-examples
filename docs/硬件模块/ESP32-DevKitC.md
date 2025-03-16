@@ -5,8 +5,9 @@
 > - 官方文档 v4：https://docs.espressif.com/projects/esp-dev-kits/zh_CN/latest/esp32/esp32-devkitc/user_guide.html
 >     - 核心模组没换，都是 ESP-WROOM-32，故而无论 v 几版本文档可看，只是开发板引脚不同
 > - Arduino 框架版本文档：https://docs.geeksman.com/esp32/Arduino/01.esp32-arduino-intro.html
+> - https://lastminuteengineers.com/esp32-ntp-server-date-time-tutorial/
 
-##vv1-30pin
+##v1-30pin
 
 ![ESP32-DevKitC](../images/ESP32-DevKitC.webp)
 

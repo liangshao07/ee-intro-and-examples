@@ -15,7 +15,8 @@
     - [MOOC - STM32CubeIDE basics（3h）](https://www.youtube.com/playlist?list=PLnMKNibPkDnFCosVVv98U5dCulE6T3Iy8)
     - [MOOC - STM32CubeMX and STM32Cube HAL basics（6h）](https://www.youtube.com/playlist?list=PLnMKNibPkDnGtuIl5v0CvC81Am7SKpj02)
 - 中文教程
-    - 
+    - 【【STM32入门教程】应该是全B站最好的STM32教程了】 https://www.bilibili.com/video/BV12v4y1y7uV/?share_source=copy_web&vd_source=0152764925b99fadd2e9e3592e9421a8
+    - 【全网最完整最干练的STM32CubeMX/CubeIDE开发教程 拥抱高效Cube开发方式—Kevin带你读《STM32Cube高效开发教程基础篇》】 https://www.bilibili.com/video/BV1Df421X7oP/?share_source=copy_web&vd_source=0152764925b99fadd2e9e3592e9421a8
     
 - 其它
     - https://www.youtube.com/watch?v=Re60MW2xNmM&list=PLfIJKC1ud8gga7xeUUJ-bRUbeChfTOOBd
